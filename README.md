@@ -5,6 +5,7 @@ DEGO Course Project — Team 7
 
 ## Team Members
 - Beatriz Boal
+- Miguel Rodrigues
 - [other members' name]
 
 ## Project Description
