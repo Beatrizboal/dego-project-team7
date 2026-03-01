@@ -1,6 +1,23 @@
 import pandas as pd
 import numpy as np
 
+#Convert financial columns to numeric. Invalid values become NaN.
+def convert_numeric_columns(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+
+    numeric_columns = [
+        "financials.annual_income",
+        "financials.debt_to_income",
+        "financials.credit_history_months"
+    ]
+
+    for col in numeric_columns:
+        if col in df.columns:
+            df[col] = df[col].astype(str).str.replace(",", "", regex=False).str.replace("$", "", regex=False).str.strip()
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    return df
+
 # Handling missing values
 def impute_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
@@ -18,19 +35,19 @@ def impute_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# Standardize the format of gender values
+# Remove invalid financial records
+def remove_invalid_income(df: pd.DataFrame) -> pd.DataFrame:
+    return df[df["financials.annual_income"] > 0]
+
+# Standardize gender categories
 def normalize_gender(df: pd.DataFrame) -> pd.DataFrame:
+    df=df.copy()
     df["applicant_info.gender"] = df["applicant_info.gender"].str.upper()
     df["applicant_info.gender"] = df["applicant_info.gender"].replace({
         "M": "MALE",
         "F": "FEMALE"
     })
     return df
-
-# Remove records with invalid income
-def remove_invalid_income(df: pd.DataFrame) -> pd.DataFrame:
-    return df[df["financials.annual_income"] > 0]
-
 
 # Convert date column to datetime
 def standardize_dates(df: pd.DataFrame) -> pd.DataFrame:
