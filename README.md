@@ -6,7 +6,7 @@ DEGO Course Project — Team 7
 ## Team Members
 - Beatriz Boal
 - Miguel Rodrigues
-- [other members' name]
+- Martin Schmitz
 
 ## Project Description
 Credit scoring bias analysis for the DEGO course.
