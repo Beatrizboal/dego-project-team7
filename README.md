@@ -138,7 +138,7 @@ Five controls were implemented with working code, each directly addressing a gap
 Apply the Section 5.2 pipeline before distributing any data to analysts. The pipeline pseudonymises SSNs and names, generalises quasi-identifiers, and drops 7 excess fields — reducing plaintext PII field-records from **2,480 to 0**.
 
 ### 5.2 Consent Tracking (Critical)
-Add four fields to every application record: `consent_timestamp`, `lawful_basis_credit`, `lawful_basis_fraud`, `consent_behavioral`. Records without behavioral consent (`~15%` in simulation) must have spending sub-categories nullified. Implement a withdrawal endpoint.
+Add four fields to every application record: `consent_timestamp`, `lawful_basis_credit`, `lawful_basis_fraud`, `consent_behavioral`. Records without behavioral consent (~15% in simulation) must have spending sub-categories nullified. Implement a withdrawal endpoint.
 
 ### 5.3 Data Retention Policy (High)
 Add `application_date` and `retention_until` to the schema. Apply the following schedule:
