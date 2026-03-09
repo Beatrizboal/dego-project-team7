@@ -1,8 +1,11 @@
-# Credit Application Governance Analysis — Team 7
+# dego-project-team7
+DEGO Course Project — Team 7
+
+# DEGO Project – Team 7
 
 **Course:** Data Ecosystems and Governance in Organizations (DEGO 2606) — Nova SBE
 **Project:** NovaCred Credit Application Audit
-**Dataset:** 500 synthetic credit applications (`raw_credit_applications.json`)
+**Dataset:** 502 synthetic credit applications (`raw_credit_applications.json`)
 
 ---
 
@@ -16,17 +19,67 @@
 
 ---
 
+## Project Description
+
+This project analyzes a synthetic credit application dataset used by **NovaCred**, a fintech startup that applies machine learning models to approve or reject loan applications.
+
+Following a regulatory inquiry regarding potential discrimination in lending practices, our team performed a **data governance audit** of the dataset. The audit evaluates:
+
+- Data quality issues
+- Algorithmic bias in credit decisions
+- Privacy and governance risks
+- Compliance with **GDPR** and the **EU AI Act**
+
+The goal of the project is to demonstrate how **data governance controls can mitigate ethical, legal, and operational risks in AI-driven financial systems**.
+
+---
+
+## Repository Structure
+
+```
+dego-project-team7/
+├── README.md                        # This document — executive summary
+├── data/
+│   ├── raw/
+│   │   └── raw_credit_applications.json   # Original dataset (502 records)
+│   └── processed/
+│       └── clean_credit_applications.csv  # Cleaned output from 01-data-quality
+├── notebooks/
+│   ├── 01-data-quality.ipynb        # Data loading, cleaning, quality audit
+│   ├── 02-bias-analysis.ipynb       # Bias detection, fairness metrics, DI ratio
+│   └── 03-privacy-demo.ipynb        # PII identification, pseudonymisation, GDPR mapping, governance
+├── src/
+│   └── __init__.py
+├── reports/                         # Visual outputs and analysis artifacts 
+│   └── pii_risk_coverage.png        # PII field coverage visualisation
+└── presentation/                    # Final project presentation
+```
+
+---
+
 ## Executive Summary
 
 NovaCred is a fintech startup using machine learning to make credit decisions. Following a regulatory inquiry, our team was engaged as a Data Governance Task Force to audit the raw credit application dataset for data quality issues, algorithmic bias, and privacy and governance compliance gaps.
 
 **The audit uncovered critical failures across all three dimensions:**
 
-- **Data quality:** Multiple data quality issues identified including duplicates, type inconsistencies, missing values, and invalid entries across the 500-record dataset
+- **Data quality:** Multiple data quality issues identified including duplicates, type inconsistencies, missing values, and invalid entries across the 502-record dataset
 - **Algorithmic bias:** A Disparate Impact ratio of **0.77** for gender (below the 0.80 four-fifths rule threshold), indicating statistically significant potential discrimination against female applicants
 - **Privacy & governance:** 496 Social Security Numbers stored in plaintext, no consent documentation, no data retention policy, fully automated credit decisions with no human oversight — all constituting critical GDPR and EU AI Act violations
 
 **The system cannot be legally deployed in the EU in its current state.** Immediate remediation is required before the next lending cycle.
+
+---
+
+## Key Metrics
+
+| Metric | Result |
+|------|------|
+| Total credit applications | 500 |
+| Dataset columns after processing | 34 |
+| Plaintext SSNs detected | 496 |
+| Disparate Impact ratio (gender) | 0.77 |
+| Records overdue for deletion | 203 |
 
 ---
 
@@ -35,18 +88,28 @@ NovaCred is a fintech startup using machine learning to make credit decisions. F
 > *Primary analysis: [`notebooks/01-data-quality.ipynb`](notebooks/01-data-quality.ipynb)*
 > *Role: Beatriz Boal, Data Engineer*
 
-<!-- Data Engineer: please fill in specific findings and counts below -->
+The raw dataset contained **502 application records** in nested JSON format.  
 
-**Issues identified across 6 quality dimensions:**
+**Issues identified across 5 quality dimensions:**
 
-| Category | Issue | Records Affected |
-|---|---|---|
-| Completeness | Missing values across key fields | TBC |
-| Consistency | Inconsistent gender coding (e.g., "M" / "Male" / "male") | TBC |
-| Validity | Invalid values (e.g., negative credit history months) | TBC |
-| Accuracy | Income stored as string instead of numeric | TBC |
-| Uniqueness | Duplicate application records | TBC |
-| Timeliness | Inconsistent date formats across `date_of_birth` field | TBC |
+| Dimension | Issue |
+|---|---|
+| Completeness | Missing values across key fields |
+| Consistency | Inconsistent gender encoding (e.g., "M" / "Male" and "F" / "Female"), different date formats and iconsistent schema (`financials.annual_income` and `financials.annual_salary`)
+| Validity | Data type mismatches and invalid values (e.g., negative credit history months)
+| Accuracy | Business rule validation required for financial attributes
+| Uniqueness | Duplicate application records (app_001 and app_042)
+
+**Data Engineering Pipeline:**
+
+The nested JSON dataset was processed through the following pipeline:
+Key processing steps included:
+- Standardizing missing values and categorical encodings  
+- Consolidating duplicated schema fields  
+- Converting variables to appropriate data types  
+- Removing duplicate applications and correcting implausible values  
+- Transforming nested spending data into tabular features  
+- Exporting the cleaned dataset to the processed data directory
 
 **Cleaned output:** `data/processed/clean_credit_applications.csv` — 500 records, 34 columns.
 
@@ -168,29 +231,6 @@ Under this model, **252 of 500 applications (50.4%) require human review** — e
 
 ### 5.6 Governance Scorecard (Ongoing)
 A 10-control scorecard was implemented to track compliance against the accountability principle (Art. 5(2)). NovaCred's current overall compliance score is **6%**. Monthly DPO review is recommended, with a quarterly report to senior management.
-
----
-
-## Repository Structure
-
-```
-dego-project-team7/
-├── README.md                        # This document — executive summary
-├── data/
-│   ├── raw/
-│   │   └── raw_credit_applications.json   # Original dataset (500 records)
-│   └── processed/
-│       └── clean_credit_applications.csv  # Cleaned output from 01-data-quality
-├── notebooks/
-│   ├── 01-data-quality.ipynb        # Data loading, cleaning, quality audit
-│   ├── 02-bias-analysis.ipynb       # Bias detection, fairness metrics, DI ratio
-│   └── 03-privacy-demo.ipynb        # PII identification, pseudonymisation, GDPR mapping, governance
-├── src/
-│   └── __init__.py
-├── reports/
-│   └── pii_risk_coverage.png        # PII field coverage visualisation
-└── presentation/                    # Video link — see below
-```
 
 ---
 
