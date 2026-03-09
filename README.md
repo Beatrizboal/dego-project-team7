@@ -126,16 +126,19 @@ Key processing steps included:
 
 | Group | Approval Rate |
 |---|---|
-| Male (privileged) | TBC |
-| Female (unprivileged) | TBC |
+| Male (privileged) | **51%** |
+| Female (unprivileged) | **66%** |
 | **DI Ratio (Female / Male)** | **0.77** |
 
 A DI ratio of **0.77 is below the 0.80 threshold**, indicating potential disparate impact against female applicants under the four-fifths rule. NovaCred's lending model may constitute unlawful discrimination under GDPR Article 22 and EU AI Act Article 10 requirements for unbiased training data.
 
 **Additional bias patterns identified:**
-- Proxy discrimination: geographic attributes (`zip_code`) correlating with protected characteristics — TBC
-- Age-based patterns — TBC
-- Interaction effects (age × gender) — TBC
+
+- Proxy discrimination risk: `zip_code` is strongly associated with gender (χ² p < 0.001) but not with loan approval outcomes, indicating it is not currently acting as a proxy in decisions, though it should be monitored.
+
+- Age-related patterns: approval rates increase with age, and younger applicants are approved less frequently. However, regression analysis suggests this pattern is largely explained by financial factors correlated with age (e.g., credit history and income).
+
+- Interaction effects (age × gender): no statistically significant interaction was found, indicating that the gender approval gap is consistent across age groups.
 
 ---
 
