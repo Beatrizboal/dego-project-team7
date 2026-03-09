@@ -85,7 +85,7 @@ NovaCred is a fintech startup using machine learning to make credit decisions. F
 
 ## 1. Data Quality Findings
 
-> *Primary analysis: [`notebooks/01-data-quality.ipynb`](notebooks/01-data-quality.ipynb)*
+> *Primary analysis: [`notebooks/01_data_quality.ipynb`](notebooks/01_data_quality.ipynb)*
 > *Role: Beatriz Boal, Data Engineer*
 
 The raw dataset contained **502 application records** in nested JSON format.  
