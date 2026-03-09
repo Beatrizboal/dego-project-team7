@@ -227,7 +227,7 @@ Deploy a tiered review model based on model score:
 | Score | Tier | Decision Path |
 |---|---|---|
 | ≥ 0.70 | Low risk | Auto-approve; 5% sampled audit review |
-| 0.40 – 0.69 | Medium risk | **Mandatory human review before decision** |
+| 0.40 – 0.69 | Medium risk | Mandatory human review before decision |
 | < 0.40 | High risk | Auto-decline with explanation; review on request |
 
 Under this model, **252 of 500 applications (50.4%) require human review** — ensuring Art. 22 compliance for the highest-risk decisions.
@@ -259,7 +259,7 @@ All notebooks load data from `data/processed/clean_credit_applications.csv`. Run
 
 ## Video Presentation
 
-<!-- Add YouTube unlisted link or Google Drive link here before submission -->
+https://youtu.be/CCau0V_D07Y
 
 ---
 
